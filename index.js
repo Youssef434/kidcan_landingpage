@@ -82,22 +82,32 @@ const logo = document.querySelector('.logo')
 let activated = false;
 
 sandwitchBtn.addEventListener('click', () => {
-  activated = !activated
+  toggleNavBar()
+})
 
+function toggleNavBar() {
+  activated = !activated
   if (activated) {
     header.classList.add('header-sandwitch-activated')
     navbarContent.classList.add('navbar-content-sandwitch-activated')
-    navabarContentItems.forEach((item) => item.classList.add('navbar-item-sandwitch-activated'))
     logo.classList.add('logo-sandwitch-activated')
     sandwitchBtn.classList.add('sandwitch-activated')
-    // sandwitchBtn.add('.secondary-navbar-activated')
+    document.querySelector('.sandwitch').style.display = 'none'
+    document.querySelector('.close').style.display = 'block'
+    document.querySelector('.main-section').classList.add('.main-section-activated')
   } else {
     header.classList.remove('header-sandwitch-activated')
     navbarContent.classList.remove('navbar-content-sandwitch-activated')
-    navabarContentItems.forEach((item) => item.classList.remove('navbar-item-sandwitch-activated'))
     logo.classList.remove('logo-sandwitch-activated')
     sandwitchBtn.classList.remove('sandwitch-activated')
-    // sandwitchBtn.remove('.secondary-navbar-activated')
+    document.querySelector('.sandwitch').style.display = 'block';
+    document.querySelector('.close').style.display = 'none';
+    document.querySelector('.main-section').classList.remove('.main-section-activated')
   }
+}
 
+navbarContent.addEventListener('click', (e) => {
+  if (e.target.tagName === 'P') {
+    setTimeout(toggleNavBar, 150)
+  }
 })
